@@ -48,7 +48,7 @@ function onHospitalSaveComplete(response, status){
 			
 		if(resultSet.status.trim() == "success")
 		{
-			$("#alertSuccess").text("Successfully saved.");
+			$("#alertSuccess").text("Successfully Saved.");
 			$("#alertSuccess").show();
 					
 			$("#divDoctorsGrid").html(resultSet.data);
@@ -58,10 +58,10 @@ function onHospitalSaveComplete(response, status){
 			$("#alertError").show();
 		}
 	}else if(status == "error"){
-		$("#alertError").text("Error While saving.");
+		$("#alertError").text("Error While Saving.");
 		$("#slertError").show();
 	}else{
-		$("#alertError").text("Unknown Error while saving.");
+		$("#alertError").text("Unknown Error while Saving.");
 		$("#alertError").show();
 	}
 	$("#hidDoctorIDSave").val("");
@@ -117,10 +117,10 @@ function onHospitalDeletedComplete(response, status)
 			$("#alertError").show();
 		}
 	}else if(status == "error"){
-		$("#alertError").text("Error While deleting.");
+		$("#alertError").text("Error While Deleting.");
 		$("#alertError").show();
 	}else{
-		$("#alertError").text("Unknown Error while deleting.");
+		$("#alertError").text("Unknown Error While Deleting.");
 		$("#alertError").show();
 	}
 }
@@ -154,19 +154,19 @@ function validateHospitalForm() {
 	//is Numerical value
 	var phoneNum = $("#mobile").val().trim();  
 	if (!$.isNumeric(phoneNum))  {   
-		return "Insert valied phone number.";  
+		return "Insert valid phone number.";  
 	} 
 	
 	// Email  
 	if ($("#email").val().trim() == "")  
 	{   
-		return "Insert Email Address.";  
+		return "Insert Email.";  
 	} 
 	
 	// Description  
 	if ($("#spec").val().trim() == "")  
 	{  
-		return "Insert Spec.";  
+		return "Insert Specialization.";  
 	}
 	
 	// Open Hours  

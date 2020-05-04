@@ -43,7 +43,6 @@ public class DoctorAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Inside doPost method");
 		
 		String result = docObj.insertDoctors(request.getParameter("doctorName"), request.getParameter("nic"), 
 				request.getParameter("address"), request.getParameter("mobile"), 
