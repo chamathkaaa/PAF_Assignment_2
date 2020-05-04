@@ -30,7 +30,7 @@ $(document).on("click", "#btnSave", function(event)
 	
 	$.ajax(
 	{
-		url : "hospitalsAPI",
+		url : "DoctorAPI",
 		type : t,
 		data : $("#formDoctor").serialize(),
 		dataType : "text",
@@ -88,7 +88,7 @@ $(document).on("click", ".btnUpdate", function(event)
 $(document).on("click", ".btnRemove", function(event){
 	$.ajax(
 	{
-		url : "hospitalsAPI",
+		url : "DoctorAPI",
 		type : "DELETE",
 		data : "DoctorID=" + $(this).data("doctorid"),
 		dataType : "text",

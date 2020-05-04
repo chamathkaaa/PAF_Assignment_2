@@ -1,11 +1,17 @@
 package com;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Doctors;
 
 /**
  * Servlet implementation class DoctorAPI
@@ -17,6 +23,9 @@ public class DoctorAPI extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
+	Doctors docObj = new Doctors();
+	
     public DoctorAPI() {
         super();
         // TODO Auto-generated constructor stub
@@ -26,7 +35,7 @@ public class DoctorAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -34,22 +43,71 @@ public class DoctorAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("Inside doPost method");
+		
+		String result = docObj.insertDoctors(request.getParameter("doctorName"), request.getParameter("nic"), 
+				request.getParameter("address"), request.getParameter("mobile"), 
+				request.getParameter("email"), request.getParameter("spec"), 
+				request.getParameter("hospitalName"),
+				request.getParameter("deptName"));
+		
+		response.getWriter().write(result);
 	}
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
+	
+	private Map<String, String> getParasMap(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();  
+		try  {   
+			Scanner scanner = new Scanner(request.getInputStream(), "UTF-8");   
+			String queryString = scanner.hasNext() ?
+					scanner.useDelimiter("\\A").next() : "";   
+			scanner.close(); 
+		 
+		  String[] params = queryString.split("&");   
+		  for (String param : params)   {
+			  String[] p = param.split("=");    
+			  map.put(p[0], p[1]);   
+		  }  
+		  
+		}catch (Exception e)  {  
+			
+		} 
+		return map;
+	}
+	
+	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+
+		Map<String, String> param = getParasMap(request);
+		
+		String result = docObj.updateDoctors(param.get("hidDoctorIDSave").toString(),
+				param.get("doctorName").toString(),
+				param.get("nic").toString(),
+				param.get("address").toString(), 
+				param.get("mobile").toString(),
+				param.get("email").toString(),
+				param.get("spec").toString(),
+				param.get("hospitalName").toString(),
+				param.get("deptName").toString());
+		
+		response.getWriter().write(result);
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+
+		Map<String, String> param = getParasMap(request);
+		
+		String result = docObj.deleteDoctors(param.get("DoctorID").toString());
+		
+		response.getWriter().write(result);
 	}
 
 }
